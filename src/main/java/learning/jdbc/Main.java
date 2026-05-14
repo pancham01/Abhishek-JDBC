@@ -21,12 +21,6 @@ public class Main {
 		
 		
 		
-//		edao.saveEmployee(e1);
-//		edao.saveEmployee(e2);
-//		edao.saveEmployee(e3);
-//		edao.createTable("Car");
-//		edao.updateEmpRecord(e2);
-		edao.deleteAnEmployee(14);
 		
 	}
 
