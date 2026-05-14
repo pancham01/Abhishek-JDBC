@@ -24,7 +24,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		try {
 			
-//			connection = new Driver().connect("jdbc:mysql://localhost:3306/mydb", prop);
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", prop);
 
 		} catch (SQLException e) {
@@ -96,19 +95,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return null;
 	}
 
-	@Override
-	public void createTable(String tableName) {
-		try (Statement statement = connection.createStatement()) {
-
-			statement.executeUpdate("create table " + tableName
-					+ "(id int not null, name varchar(100),gender varchar(10),salary int, primary key(id))");
-
-			System.out.println("create table " + tableName
-					+ "(id int not null, name varchar(100),gender varchar(10),salary int, primary key(id))");
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-	}
+	
 
 }

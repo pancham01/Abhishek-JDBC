@@ -7,7 +7,6 @@ import learning.jdbc.entity.Employee;
 
 public interface EmployeeDao {
 
-	public void createTable(String tableName);
 
 	public void saveEmployee(Employee e);
 
