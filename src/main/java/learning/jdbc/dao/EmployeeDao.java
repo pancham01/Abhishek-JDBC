@@ -14,7 +14,9 @@ public interface EmployeeDao {
 
 	public void deleteAnEmployee(int id);
 
-	public Employee getEmployee(int id);
+	public Employee getEmployeeById(int id);
+
+	public Employee getEmployeeByName(String name);
 
 	public void printAllEmployees();
 

@@ -12,16 +12,14 @@ public class Main {
 
 
 		Employee e1 = new Employee(15, "Arya", "female", 989898);
-		Employee e2 = new Employee(12, "Nikita Kumari", "female", 449898);
-		
-		Employee e3 = new Employee(13, "Yati Singh", "female", 100098);
 		
 		
 		EmployeeDao edao = new EmployeeDaoImpl();
 		
-		
-		
-		
+		edao.printAllEmployees();
+//		Employee employee = edao.getEmployeeById(3);
+//		
+//		System.out.println(employee);
 	}
 
 }
