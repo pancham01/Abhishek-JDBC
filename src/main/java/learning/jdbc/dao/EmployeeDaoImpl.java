@@ -2,6 +2,7 @@ package learning.jdbc.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,13 +41,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void saveEmployee(Employee e) {
 
-		try (Statement statement = connection.createStatement()) {
+		try (PreparedStatement ps = connection
+				.prepareStatement("INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY) VALUES(?,?,?,?)")) {
 
-			statement.executeUpdate("insert into employee(id,name,gender,salary) values(" + e.getId() + ",'"
-					+ e.getName() + "','" + e.getGender() + "'," + e.getSalary() + ")");
+			ps.setInt(1, e.getId());
+			ps.setString(2, e.getName());
+			ps.setString(3, e.getGender());
+			ps.setInt(4, e.getSalary());
 
-			System.out.println("insert into employee(id,name,gender,salary) values(" + e.getId() + ",'" + e.getName()
-					+ "','" + e.getGender() + "'," + e.getSalary() + ")");
+			ps.executeUpdate();
+
+			System.out.println("INSERT INTO EMPLOYEE(ID,NAME,GENDER,SALARY) VALUES(?,?,?,?)");
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -58,7 +63,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public void updateEmpRecord(Employee e) throws SQLException {
 
 		Statement statement = connection.createStatement();
-
 		statement.executeUpdate(String.format(UPDATE_QUERY, e.getName(), e.getGender(), e.getSalary(), e.getId()));
 
 		System.out.println(String.format(UPDATE_QUERY, e.getName(), e.getGender(), e.getSalary(), e.getId()));
@@ -113,12 +117,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ResultSet resultSet = statement.executeQuery(String.format(GET_EMP_BY_NAME, name));
 
 			while (resultSet.next()) {
-				
+
 				System.out.println("Id = " + resultSet.getInt(1) + "    Name = " + resultSet.getString(2)
-				+ "\t Gender = " + resultSet.getString(3) + "\t Salary = " + resultSet.getInt(4));
+						+ "\t Gender = " + resultSet.getString(3) + "\t Salary = " + resultSet.getInt(4));
 
 			}
-
 
 			System.out.println(String.format(GET_EMP_BY_NAME, name));
 

@@ -11,21 +11,14 @@ public class Main {
 	public static void main(String[] args) throws SQLException  {
 
 
-		Employee e1 = new Employee(15, "Arya", "female", 989898);
+		Employee e1 = new Employee(14, "Arya", "female", 989898);
 		
 		
 		EmployeeDao edao = new EmployeeDaoImpl();
 		
-//		edao.printAllEmployees();
-//		Employee employee = edao.getEmployeeById(3);
-//		
-//		System.out.println(employee);
+//		edao.saveEmployee(e1);
 		
-//		System.out.println(edao.getAllEmployees());
-		
-		edao.getEmployeeByName("Ish' or '1=1");
-		
-		
+		edao.printAllEmployees();
 	}
 
 }
