@@ -16,10 +16,16 @@ public class Main {
 		
 		EmployeeDao edao = new EmployeeDaoImpl();
 		
-		edao.printAllEmployees();
+//		edao.printAllEmployees();
 //		Employee employee = edao.getEmployeeById(3);
 //		
 //		System.out.println(employee);
+		
+//		System.out.println(edao.getAllEmployees());
+		
+		edao.getEmployeeByName("Ish' or '1=1");
+		
+		
 	}
 
 }

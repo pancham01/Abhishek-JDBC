@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,6 +18,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	private static final String DELETE_QUERY = "DELETE FROM EMPLOYEE WHERE ID = %d";
 	private static final String SELECT_QUERY = "SELECT * FROM EMPLOYEE";
 	private static final String GET_EMP_BY_ID = "SELECT * FROM EMPLOYEE WHERE ID = %d";
+	private static final String GET_EMP_BY_NAME = "SELECT * FROM EMPLOYEE WHERE NAME = '%s'";
 
 	static Connection connection = null;
 	static {
@@ -105,7 +107,26 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public Employee getEmployeeByName(String name) {
 
-		return null;
+		Employee e = new Employee();
+		try (Statement statement = connection.createStatement()) {
+
+			ResultSet resultSet = statement.executeQuery(String.format(GET_EMP_BY_NAME, name));
+
+			while (resultSet.next()) {
+				
+				System.out.println("Id = " + resultSet.getInt(1) + "    Name = " + resultSet.getString(2)
+				+ "\t Gender = " + resultSet.getString(3) + "\t Salary = " + resultSet.getInt(4));
+
+			}
+
+
+			System.out.println(String.format(GET_EMP_BY_NAME, name));
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		return e;
 	}
 
 	@Override
@@ -120,8 +141,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				System.out.println("Id = " + resultSet.getInt(1) + "    Name = " + resultSet.getString(2)
 						+ "\t Gender = " + resultSet.getString(3) + "\t Salary = " + resultSet.getInt(4));
 
-				
-				
 //				System.out.println("Id = " + resultSet.getInt(1) );
 //				System.out.println("Name = " + resultSet.getString(2) );
 //				System.out.println("Gender = " + resultSet.getString(3) );
@@ -139,8 +158,32 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Employee> emps = new ArrayList<>();
+
+		try (Statement statement = connection.createStatement()) {
+
+			ResultSet resultSet = statement.executeQuery(SELECT_QUERY);
+
+			while (resultSet.next()) {
+
+				Employee e = new Employee();
+
+				e.setId(resultSet.getInt(1));
+				e.setName(resultSet.getString(2));
+				e.setGender(resultSet.getString(3));
+				e.setSalary(resultSet.getInt(4));
+
+				emps.add(e);
+			}
+
+			System.out.println(SELECT_QUERY);
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		return emps;
 	}
 
 }
