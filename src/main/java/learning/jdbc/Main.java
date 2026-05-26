@@ -19,6 +19,8 @@ public class Main {
 //		edao.saveEmployee(e1);
 		
 		edao.printAllEmployees();
+		
+//		edao.batchProcessing();
 	}
 
 }

@@ -21,5 +21,7 @@ public interface EmployeeDao {
 	public void printAllEmployees();
 
 	public List<Employee> getAllEmployees();
+	
+	public void batchProcessing()throws SQLException;
 
 }
